@@ -54,17 +54,24 @@ const BookList = () => {
 
   return (
     <div>
-      <TextField
-        label="Search Books"
-        variant="outlined"
-        value={query}
-        onChange={handleInputChange}
-        onKeyDown={handleKeyDown}
-        margin="normal"
-      />
-      <Button variant="contained" color="primary" onClick={handleSearch}>
-        Search
-      </Button>
+      <div className="center-container">
+        <TextField
+          label="Search Books"
+          variant="outlined"
+          value={query}
+          onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          margin="normal"
+        />
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSearch}
+          style={{ marginBottom: "10px" }}
+        >
+          Search
+        </Button>
+      </div>
       {books.length > 0 && (
         <div className="cards">
           {books.map((book) => (
