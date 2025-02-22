@@ -12,6 +12,10 @@ interface Book {
   id: string;
   volumeInfo: {
     title: string;
+    authors?: string[];
+    publishedDate?: string;
+    description?: string;
+    publisher?: string;
     imageLinks?: {
       thumbnail: string;
     };
@@ -25,7 +29,9 @@ const BookList = () => {
 
   useEffect(() => {
     if (searchQuery) {
-      fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchQuery}`)
+      fetch(
+        `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&maxResults=40`
+      )
         .then((response) => response.json())
         .then((data) => {
           if (data.items) {
@@ -84,9 +90,36 @@ const BookList = () => {
                 />
               )}
               <CardContent>
-                <Typography gutterBottom component="div">
+                <Typography gutterBottom variant="h5" component="div">
                   {book.volumeInfo.title}
                 </Typography>
+                {book.volumeInfo.authors && (
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {`Authors: ${book.volumeInfo.authors.join(", ")}`}
+                  </Typography>
+                )}
+                {book.volumeInfo.publishedDate && (
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {`Published: ${book.volumeInfo.publishedDate}`}
+                  </Typography>
+                )}
+                {book.volumeInfo.publisher && (
+                  <Typography
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    {`Publisher: ${book.volumeInfo.publisher}`}
+                  </Typography>
+                )}
               </CardContent>
             </Card>
           ))}
