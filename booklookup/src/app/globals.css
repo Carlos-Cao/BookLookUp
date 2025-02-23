@@ -2,6 +2,11 @@ body {
   font-family: var(--font-open-sans);
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -14,4 +19,21 @@ body {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
+}
+
+.header {
+  background-color: #4285F4; 
+  color: white;
+  padding: 1rem;
+}
+
+.header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 1.875rem;
+  font-weight: bold;
 }
