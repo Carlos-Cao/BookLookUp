@@ -5,6 +5,19 @@ body {
 html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.main-content {
+  flex-grow: 1;
 }
 
 .cards {
@@ -36,4 +49,15 @@ html, body {
 .header-title {
   font-size: 1.875rem;
   font-weight: bold;
+}
+
+.footer {
+  background-color: #4285F4;
+  color: white;
+  padding: 1rem 0;
+}
+
+.footer-container {
+  margin: 0 auto;
+  text-align: center;
 }
