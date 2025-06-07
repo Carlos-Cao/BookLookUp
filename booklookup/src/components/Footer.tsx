@@ -5,7 +5,9 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <a href="https://github.com/Carlos-Cao">
-          <p>&copy; {new Date().getFullYear()} Carlos-Cao</p>
+          <p style={{ color: "#fff" }}>
+            &copy; {new Date().getFullYear()} Carlos-Cao
+          </p>
         </a>
       </div>
     </footer>
