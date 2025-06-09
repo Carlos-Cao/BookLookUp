@@ -49,6 +49,11 @@ html, body {
 .header-title {
   font-size: 1.875rem;
   font-weight: bold;
+  transition: font-size 0.3s ease;
+}
+
+.hover-large:hover {
+  font-size: 2em; 
 }
 
 .footer {
@@ -84,4 +89,13 @@ html, body {
 .button {
   background-color: "#1a73e8";
   color: "#fff"
+}
+
+.search-button {
+  margin-bottom: 10px !important;
+  background-color: #1a73e8 !important;
+  color: #fff !important;
+}
+.no-text-decoration {
+  text-decoration: none;
 }
