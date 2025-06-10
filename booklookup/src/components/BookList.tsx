@@ -1,31 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-
-interface Book {
-  id: string;
-  searchInfo?: {
-    textSnippet?: string;
-  };
-  volumeInfo: {
-    title: string;
-    authors?: string[];
-    publishedDate?: string;
-    description?: string;
-    publisher?: string;
-    infoLink: string;
-    imageLinks?: {
-      smallThumbnail: string;
-      thumbnail: string;
-    };
-  };
-}
+import SearchBar from "./SearchBar";
+import BookCard from "./BookCard";
+import { Book } from "../types/types";
 
 const BookList = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -84,88 +64,18 @@ const BookList = () => {
   return (
     <div>
       <div className="center-container">
-        <TextField
-          label="Search Books"
-          variant="outlined"
-          value={query}
-          onChange={handleInputChange}
+        <SearchBar
+          query={query}
+          onInputChange={handleInputChange}
+          onSearch={handleSearch}
           onKeyDown={handleKeyDown}
-          margin="normal"
         />
-        <Button
-          variant="contained"
-          onClick={handleSearch}
-          style={{
-            marginBottom: "10px",
-            backgroundColor: "#1a73e8",
-            color: "#fff",
-          }}
-        >
-          Search
-        </Button>
       </div>
       {books.length > 0 && (
         <div>
           <div className="cards">
-            {books.map((book) => (
-              <a
-                key={book.id}
-                href={book.volumeInfo.infoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: "none" }}
-              >
-                <Card
-                  key={book.id}
-                  sx={{
-                    border: "1px solid",
-                    borderRadius: "8px",
-                  }}
-                >
-                  {book.volumeInfo.imageLinks && (
-                    <CardMedia
-                      component="img"
-                      image={book.volumeInfo.imageLinks.smallThumbnail}
-                      alt={book.volumeInfo.title}
-                      style={{
-                        width: "150px",
-                        height: "auto",
-                        margin: "0 auto",
-                        border: "2px solid #ccc",
-                        borderRadius: "8px",
-                      }}
-                    />
-                  )}
-                  <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                      {book.volumeInfo.title}
-                    </Typography>
-                    {book.volumeInfo.authors && (
-                      <Typography variant="body2" component="p">
-                        <strong>Authors:</strong>{" "}
-                        {book.volumeInfo.authors.join(", ")}
-                      </Typography>
-                    )}
-                    {book.volumeInfo.publishedDate && (
-                      <Typography variant="body2" component="p">
-                        <strong>Published:</strong>{" "}
-                        {book.volumeInfo.publishedDate}
-                      </Typography>
-                    )}
-                    {book.volumeInfo.publisher && (
-                      <Typography variant="body2" component="p">
-                        <strong>Publisher:</strong> {book.volumeInfo.publisher}
-                      </Typography>
-                    )}
-                    {book.searchInfo && (
-                      <Typography variant="body2" component="p">
-                        <strong>Description:</strong>{" "}
-                        {book.searchInfo.textSnippet}
-                      </Typography>
-                    )}
-                  </CardContent>
-                </Card>
-              </a>
+            {books.map((book, index) => (
+              <BookCard key={`${book.id}-${index}`} book={book} />
             ))}
           </div>
           <div className="pagination-buttons">
@@ -179,14 +89,20 @@ const BookList = () => {
                 variant="contained"
                 onClick={handlePreviousPage}
                 disabled={startIndex === 0}
-                className="button"
+                sx={{
+                  backgroundColor: "#1a73e8",
+                  color: "#fff",
+                }}
               >
                 Previous
               </Button>
               <Button
                 variant="contained"
                 onClick={handleNextPage}
-                className="button"
+                sx={{
+                  backgroundColor: "#1a73e8",
+                  color: "#fff",
+                }}
               >
                 Next
               </Button>
